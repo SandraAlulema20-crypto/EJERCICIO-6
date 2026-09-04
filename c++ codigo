@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int cantidad = 0;
+    double suma = 0;
+    double mayor = -1000;
+    double menor = 1000;
+
+    int frio = 0;
+    int templado = 0;
+    int calido = 0;
+    int muyCalido = 0;
+
+    double temperatura;
+
+    cout << "Ingrese temperatura (999 para salir): ";
+    cin >> temperatura;
+
+    while (temperatura != 999) {
+
+        if (temperatura < -50 || temperatura > 60) {
+            cout << "Dato invalido, ingrese un valor entre -50 y 60" << endl;
+        } else {
+            cantidad++;
+            suma += temperatura;
+
+            if (temperatura > mayor) {
+                mayor = temperatura;
+            }
+
+            if (temperatura < menor) {
+                menor = temperatura;
+            }
+
+            if (temperatura < 10) {
+                frio++;
+            } else if (temperatura < 25) {
+                templado++;
+            } else if (temperatura < 35) {
+                calido++;
+            } else {
+                muyCalido++;
+            }
+        }
+
+        cout << "Ingrese temperatura (999 para salir): ";
+        cin >> temperatura;
+    }
+
+    if (cantidad > 0) {
+        double promedio = suma / cantidad;
+
+        cout << "\n--- Resultados ---" << endl;
+        cout << "Cantidad de datos validos: " << cantidad << endl;
+        cout << "Temperatura mayor: " << mayor << endl;
+        cout << "Temperatura menor: " << menor << endl;
+        cout << "Promedio: " << promedio << endl;
+        cout << "Frio: " << frio << endl;
+        cout << "Templado: " << templado << endl;
+        cout << "Calido: " << calido << endl;
+        cout << "Muy calido: " << muyCalido << endl;
+    } else {
+        cout << "No se ingresaron datos validos." << endl;
+    }
+
+    return 0;
+}
