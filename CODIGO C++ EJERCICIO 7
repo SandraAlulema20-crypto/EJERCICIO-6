@@ -1,0 +1,125 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    int opcionMenu;
+    float recaudacionTotal = 0.0f;
+
+    do {
+        cout << "\n===== ESTACIONAMIENTO UNIVERSITARIO =====\n";
+        cout << "1. Calcular tarifa\n";
+        cout << "2. Ver tarifas\n";
+        cout << "3. Mostrar recaudacion\n";
+        cout << "4. Salir\n";
+        cout << "Seleccione una opcion: ";
+        cin >> opcionMenu;
+
+        switch (opcionMenu) {
+
+            case 1: {
+                char registrarOtro;
+
+                do {
+                    int tipoVehiculo, horas;
+                    char rol, boletoPerdido;
+                    float tarifaHora = 0.0f, descuento, recargo;
+                    float subtotal, total;
+
+                    cout << "\n--- Tipo de vehiculo ---\n";
+                    cout << "1. Motocicleta ($0.50/h)\n";
+                    cout << "2. Automovil   ($1.00/h)\n";
+                    cout << "3. Camioneta   ($1.50/h)\n";
+                    cout << "Seleccione: ";
+                    cin >> tipoVehiculo;
+
+                    switch (tipoVehiculo) {
+                        case 1: tarifaHora = 0.50f; break;
+                        case 2: tarifaHora = 1.00f; break;
+                        case 3: tarifaHora = 1.50f; break;
+                        default:
+                            cout << "Tipo de vehiculo invalido. Se asume automovil.\n";
+                            tarifaHora = 1.00f;
+                            break;
+                    }
+
+                    do {
+                        cout << "Ingrese las horas de estacionamiento (1-24): ";
+                        cin >> horas;
+                        if (horas < 1 || horas > 24) {
+                            cout << "Horas invalidas. Debe estar entre 1 y 24.\n";
+                        }
+                    } while (horas < 1 || horas > 24);
+
+                    cout << "Ingrese rol (E = estudiante, D = docente, O = otro): ";
+                    cin >> rol;
+
+                    subtotal = horas * tarifaHora;
+
+                    if (rol == 'E' || rol == 'e') {
+                        descuento = subtotal * 0.20f;
+                        cout << "Descuento de estudiante (20%) aplicado.\n";
+                    } else if (rol == 'D' || rol == 'd') {
+                        descuento = subtotal * 0.10f;
+                        cout << "Descuento de docente (10%) aplicado.\n";
+                    } else {
+                        descuento = 0.0f;
+                        cout << "Sin descuento aplicable.\n";
+                    }
+
+                    cout << "Perdio el boleto? (S/N): ";
+                    cin >> boletoPerdido;
+
+                    if (boletoPerdido == 'S' || boletoPerdido == 's') {
+                        recargo = 5.0f;
+                        cout << "Se aplica recargo de $5 por boleto perdido.\n";
+                    } else {
+                        recargo = 0.0f;
+                    }
+
+                    total = subtotal - descuento + recargo;
+                    recaudacionTotal += total;
+
+                    cout << fixed << setprecision(2);
+                    cout << "\n--- Resumen ---\n";
+                    cout << "Subtotal:   $" << subtotal << "\n";
+                    cout << "Descuento: -$" << descuento << "\n";
+                    cout << "Recargo:   +$" << recargo << "\n";
+                    cout << "TOTAL A PAGAR: $" << total << "\n";
+
+                    cout << "\nDesea registrar otro vehiculo? (S/N): ";
+                    cin >> registrarOtro;
+
+                } while (registrarOtro == 'S' || registrarOtro == 's');
+
+                break;
+            }
+
+            case 2:
+                cout << "\n--- Tarifas por hora ---\n";
+                cout << "Motocicleta: $0.50\n";
+                cout << "Automovil:   $1.00\n";
+                cout << "Camioneta:   $1.50\n";
+                cout << "Descuentos: Estudiante 20%, Docente 10%\n";
+                cout << "Recargo por boleto perdido: $5.00\n";
+                break;
+
+            case 3:
+                cout << fixed << setprecision(2);
+                cout << "\nRecaudacion total del dia: $" << recaudacionTotal << "\n";
+                break;
+
+            case 4:
+                cout << fixed << setprecision(2);
+                cout << "\nSaliendo del sistema. Recaudacion final: $" << recaudacionTotal << "\n";
+                break;
+
+            default:
+                cout << "\nOpcion invalida. Intente de nuevo.\n";
+                break;
+        }
+
+    } while (opcionMenu != 4);
+
+    return 0;
+}
