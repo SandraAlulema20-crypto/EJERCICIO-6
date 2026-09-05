@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string clave;
+    int intentos = 0;
+    bool acceso = false;
+
+    while (intentos < 3 && !acceso) {
+        cout << "Ingrese la contrasena: ";
+        cin >> clave;
+
+        if (clave == "Java2026") {
+            acceso = true;
+            cout << "Acceso permitido" << endl;
+        } else {
+            intentos++;
+            if (intentos < 3) {
+                cout << "Clave incorrecta. Intentos restantes: " << (3 - intentos) << endl;
+            } else {
+                cout << "Usuario bloqueado" << endl;
+            }
+        }
+    }
+
+    return 0;
+}
