@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class ControlContrasena {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String clave;
+        int intentos = 0;
+        boolean acceso = false;
+
+        while (intentos < 3 && !acceso) {
+            System.out.print("Ingrese la contrasena: ");
+            clave = sc.nextLine();
+
+            if (clave.equals("Java2026")) {
+                acceso = true;
+                System.out.println("Acceso permitido");
+            } else {
+                intentos++;
+                if (intentos < 3) {
+                    System.out.println("Clave incorrecta. Intentos restantes: " + (3 - intentos));
+                } else {
+                    System.out.println("Usuario bloqueado");
+                }
+            }
+        }
+
+        sc.close();
+    }
+}
