@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int opcion;
+    double subtotal = 0;
+
+    do {
+        cout << "1. Cafe ($1,50)" << endl;
+        cout << "2. Sandwich ($2,50)" << endl;
+        cout << "3. Jugo ($1,75)" << endl;
+        cout << "4. Ensalada ($3)" << endl;
+        cout << "5. Finalizar" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        double precio = 0;
+        bool valido = true;
+
+        switch (opcion) {
+            case 1:
+                precio = 1.50;
+                break;
+            case 2:
+                precio = 2.50;
+                break;
+            case 3:
+                precio = 1.75;
+                break;
+            case 4:
+                precio = 3;
+                break;
+            case 5:
+                cout << "Finalizando compra..." << endl;
+                valido = false;
+                break;
+            default:
+                cout << "Opcion invalida." << endl;
+                valido = false;
+        }
+
+        if (valido && opcion != 5) {
+            int cantidad;
+            cout << "Ingrese la cantidad: ";
+            cin >> cantidad;
+
+            if (cantidad <= 0) {
+                cout << "Cantidad invalida." << endl;
+            } else {
+                subtotal = subtotal + (precio * cantidad);
+                cout << "Subtotal acumulado: $" << subtotal << endl;
+            }
+        }
+
+    } while (opcion != 5);
+
+    double descuento;
+    if (subtotal < 10) {
+        descuento = 0;
+    } else if (subtotal < 20) {
+        descuento = 0.05;
+    } else if (subtotal < 50) {
+        descuento = 0.10;
+    } else {
+        descuento = 0.15;
+    }
+
+    double total = subtotal - (subtotal * descuento);
+
+    cout << "Subtotal: $" << subtotal << endl;
+    cout << "Descuento aplicado: " << (descuento * 100) << "%" << endl;
+    cout << "Total a pagar: $" << total << endl;
+
+    return 0;
+}
