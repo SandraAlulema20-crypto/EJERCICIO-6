@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int cantidad;
+    cout << "Cuantos numeros va a ingresar: ";
+    cin >> cantidad;
+
+    int positivos = 0, negativos = 0, ceros = 0;
+    int pares = 0, impares = 0, multiplos3 = 0;
+    double suma = 0;
+
+    for (int i = 1; i <= cantidad; i++) {
+        int numero;
+        cout << "Ingrese el numero " << i << ": ";
+        cin >> numero;
+
+        suma = suma + numero;
+
+        if (numero > 0) {
+            positivos++;
+        } else if (numero < 0) {
+            negativos++;
+        } else {
+            ceros++;
+        }
+
+        if (numero % 2 == 0) {
+            pares++;
+        } else {
+            impares++;
+        }
+
+        if (numero % 3 == 0) {
+            multiplos3++;
+        }
+    }
+
+    cout << "Positivos: " << positivos << endl;
+    cout << "Negativos: " << negativos << endl;
+    cout << "Ceros: " << ceros << endl;
+    cout << "Pares: " << pares << endl;
+    cout << "Impares: " << impares << endl;
+    cout << "Multiplos de 3: " << multiplos3 << endl;
+    cout << "Suma total: " << suma << endl;
+
+    if (cantidad > 0) {
+        cout << "Promedio: " << (suma / cantidad) << endl;
+    } else {
+        cout << "No se registraron datos." << endl;
+    }
+
+    return 0;
+}
