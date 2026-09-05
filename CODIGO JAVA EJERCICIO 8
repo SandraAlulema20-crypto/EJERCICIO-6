@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class ProcesamientoEstadistico {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Cuantos numeros va a ingresar: ");
+        int cantidad = sc.nextInt();
+
+        int positivos = 0, negativos = 0, ceros = 0;
+        int pares = 0, impares = 0, multiplos3 = 0;
+        double suma = 0;
+
+        for (int i = 1; i <= cantidad; i++) {
+            System.out.print("Ingrese el numero " + i + ": ");
+            int numero = sc.nextInt();
+
+            suma = suma + numero;
+
+            if (numero > 0) {
+                positivos++;
+            } else if (numero < 0) {
+                negativos++;
+            } else {
+                ceros++;
+            }
+
+            if (numero % 2 == 0) {
+                pares++;
+            } else {
+                impares++;
+            }
+
+            if (numero % 3 == 0) {
+                multiplos3++;
+            }
+        }
+
+        System.out.println("Positivos: " + positivos);
+        System.out.println("Negativos: " + negativos);
+        System.out.println("Ceros: " + ceros);
+        System.out.println("Pares: " + pares);
+        System.out.println("Impares: " + impares);
+        System.out.println("Multiplos de 3: " + multiplos3);
+        System.out.println("Suma total: " + suma);
+
+        if (cantidad > 0) {
+            System.out.println("Promedio: " + (suma / cantidad));
+        } else {
+            System.out.println("No se registraron datos.");
+        }
+
+        sc.close();
+    }
+}
