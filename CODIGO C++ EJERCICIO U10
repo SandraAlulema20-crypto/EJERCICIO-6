@@ -1,0 +1,138 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    const int maxEstudiantes = 50;
+    string nombres[maxEstudiantes];
+    double promedios[maxEstudiantes];
+    double asistencias[maxEstudiantes];
+    string clasificaciones[maxEstudiantes];
+    int total = 0;
+
+    int opcion;
+
+    do {
+        cout << "1. Registrar estudiante" << endl;
+        cout << "2. Mostrar resultados" << endl;
+        cout << "3. Buscar estudiante" << endl;
+        cout << "4. Salir" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+        cin.ignore();
+
+        switch (opcion) {
+            case 1: {
+                if (total >= maxEstudiantes) {
+                    cout << "No hay espacio para mas estudiantes." << endl;
+                    break;
+                }
+
+                string nombre;
+                cout << "Ingrese el nombre del estudiante: ";
+                getline(cin, nombre);
+
+                double sumaCalif = 0;
+                bool calificacionesValidas = true;
+
+                for (int i = 1; i <= 3; i++) {
+                    double calif;
+                    cout << "Ingrese calificacion " << i << ": ";
+                    cin >> calif;
+
+                    if (calif < 0 || calif > 10) {
+                        cout << "Calificacion fuera de rango." << endl;
+                        calificacionesValidas = false;
+                    }
+
+                    sumaCalif = sumaCalif + calif;
+                }
+
+                double asistencia;
+                cout << "Ingrese el porcentaje de asistencia: ";
+                cin >> asistencia;
+                cin.ignore();
+
+                if (asistencia < 0 || asistencia > 100) {
+                    cout << "Asistencia invalida." << endl;
+                    break;
+                }
+
+                if (!calificacionesValidas) {
+                    break;
+                }
+
+                double promedio = sumaCalif / 3;
+                string clasificacion;
+
+                if (promedio >= 9 && asistencia >= 90) {
+                    clasificacion = "Excelente";
+                } else if (promedio >= 7 && asistencia >= 70) {
+                    clasificacion = "Aprobado";
+                } else if (promedio >= 5 && asistencia >= 70) {
+                    clasificacion = "Supletorio";
+                } else {
+                    clasificacion = "Reprobado";
+                }
+
+                nombres[total] = nombre;
+                promedios[total] = promedio;
+                asistencias[total] = asistencia;
+                clasificaciones[total] = clasificacion;
+                total++;
+
+                cout << "Estudiante registrado. Promedio: " << promedio << " - Clasificacion: " << clasificacion << endl;
+                break;
+            }
+
+            case 2:
+                if (total == 0) {
+                    cout << "No hay estudiantes registrados." << endl;
+                } else {
+                    for (int i = 0; i < total; i++) {
+                        cout << nombres[i] << " - Promedio: " << promedios[i] << " - Asistencia: " << asistencias[i] << "% - " << clasificaciones[i] << endl;
+                    }
+                }
+                break;
+
+            case 3: {
+                if (total == 0) {
+                    cout << "No hay estudiantes registrados." << endl;
+                    break;
+                }
+
+                string buscado;
+                cout << "Ingrese el nombre a buscar: ";
+                getline(cin, buscado);
+
+                int indice = 0;
+                bool encontrado = false;
+
+                while (indice < total && !encontrado) {
+                    if (nombres[indice] == buscado) {
+                        encontrado = true;
+                    } else {
+                        indice++;
+                    }
+                }
+
+                if (encontrado) {
+                    cout << nombres[indice] << " - Promedio: " << promedios[indice] << " - Asistencia: " << asistencias[indice] << "% - " << clasificaciones[indice] << endl;
+                } else {
+                    cout << "Estudiante no encontrado." << endl;
+                }
+                break;
+            }
+
+            case 4:
+                cout << "Saliendo..." << endl;
+                break;
+
+            default:
+                cout << "Opcion invalida." << endl;
+        }
+
+    } while (opcion != 4);
+
+    return 0;
+}
