@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class VentaEntradas {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int opcion;
+        double total = 0;
+
+        do {
+            System.out.println("1. 2D ($5)");
+            System.out.println("2. 3D ($7,50)");
+            System.out.println("3. IMAX ($10)");
+            System.out.println("4. Finalizar compra");
+            System.out.print("Seleccione una opcion: ");
+            opcion = sc.nextInt();
+
+            double precio = 0;
+            boolean valido = true;
+
+            switch (opcion) {
+                case 1:
+                    precio = 5;
+                    break;
+                case 2:
+                    precio = 7.50;
+                    break;
+                case 3:
+                    precio = 10;
+                    break;
+                case 4:
+                    System.out.println("Finalizando compra...");
+                    valido = false;
+                    break;
+                default:
+                    System.out.println("Opcion invalida.");
+                    valido = false;
+            }
+
+            if (valido && opcion != 4) {
+                System.out.print("Ingrese la edad del cliente: ");
+                int edad = sc.nextInt();
+
+                if (edad < 0 || edad > 120) {
+                    System.out.println("Edad invalida.");
+                } else {
+                    if (edad < 12) {
+                        precio = precio * 0.70;
+                    } else if (edad >= 65) {
+                        precio = precio * 0.75;
+                    }
+                    total = total + precio;
+                    System.out.println("Precio de la entrada: $" + precio);
+                }
+            }
+
+        } while (opcion != 4);
+
+        System.out.println("Total final: $" + total);
+
+        sc.close();
+    }
+}
