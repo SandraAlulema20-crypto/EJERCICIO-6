@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int opcion;
+    double total = 0;
+
+    do {
+        cout << "1. 2D ($5)" << endl;
+        cout << "2. 3D ($7,50)" << endl;
+        cout << "3. IMAX ($10)" << endl;
+        cout << "4. Finalizar compra" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        double precio = 0;
+        bool valido = true;
+
+        switch (opcion) {
+            case 1:
+                precio = 5;
+                break;
+            case 2:
+                precio = 7.50;
+                break;
+            case 3:
+                precio = 10;
+                break;
+            case 4:
+                cout << "Finalizando compra..." << endl;
+                valido = false;
+                break;
+            default:
+                cout << "Opcion invalida." << endl;
+                valido = false;
+        }
+
+        if (valido && opcion != 4) {
+            int edad;
+            cout << "Ingrese la edad del cliente: ";
+            cin >> edad;
+
+            if (edad < 0 || edad > 120) {
+                cout << "Edad invalida." << endl;
+            } else {
+                if (edad < 12) {
+                    precio = precio * 0.70;
+                } else if (edad >= 65) {
+                    precio = precio * 0.75;
+                }
+                total = total + precio;
+                cout << "Precio de la entrada: $" << precio << endl;
+            }
+        }
+
+    } while (opcion != 4);
+
+    cout << "Total final: $" << total << endl;
+
+    return 0;
+}
